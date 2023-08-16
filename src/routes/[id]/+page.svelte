@@ -15,11 +15,11 @@
 
 	function set() {
 		target = value;
-		localStorage.setItem('targetUrl', value);
+		localStorage.setItem(`targetUrl:${$page.params['id']}`, value);
 	}
 
 	onMount(() => {
-		const url = localStorage.getItem('targetUrl');
+		const url = localStorage.getItem(`targetUrl:${$page.params['id']}`);
 		if (url) {
 			window.location.href = url;
 		}
@@ -27,11 +27,11 @@
 </script>
 
 <svelte:head>
-    <title>Director - {$page.params["id"]}</title>
+	<title>Director - {$page.params['id']}</title>
 </svelte:head>
 
 <Main>
-	<div class="id"><span>id:</span> {$page.params["id"]}</div>
+	<div class="id"><span>id:</span> {$page.params['id']}</div>
 	<h1>Set target url</h1>
 	<Input bind:value on:keydown={enter} />
 	<br />
@@ -56,11 +56,11 @@
 		color: #ddd;
 		margin-bottom: 2vh;
 	}
-	
+
 	.id {
 		position: absolute;
 		top: 9px;
-		
+
 		span {
 			color: #888;
 		}
@@ -78,7 +78,7 @@
 		span {
 			color: #ddd;
 		}
-		
+
 		br {
 			display: block;
 			content: '';
