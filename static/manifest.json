@@ -2,7 +2,6 @@
   "name": "Director",
   "short_name": "Director",
   "icons": [],
-  "start_url": "/",
   "display": "fullscreen",
   "background_color": "#242424",
   "theme_color": "#242424"
