@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Main from '$lib/components/Main.svelte';
@@ -26,20 +27,17 @@
 </script>
 
 <Main>
-	<h1>Set target url</h1>
-	<Input bind:value on:keydown={enter} />
+	<h1>Site Director</h1>
+	<p>App that allows opening any(?) site from a mobile homescreen in fullscreen mode</p>
 	<br />
-	<Button on:click={set}>Set</Button>
-	<div class="target">Current target: {target}</div>
-	<div class="info">
-		> Clear the target url by navigating to
-		<span>/clear</span>
-		in the browser
-		<br />
-		> This is a helper tool to open websites in fullscreen on mobile
-		<br />
-		> Site automatically redirects to the target url on refresh until cleared
-	</div>
+	<p>How to use?</p>
+	<p class="step">1) Go to /[id], where [id] is anything you want (example: {$page.url.host}/manga)</p>
+	<p class="step">2) Add page to homescreen</p>
+	<p class="step">3) Set target url (including https:// etc)</p>
+	<br />
+	<p class="info">> Step 3 can be done inside the current browser or after opening from the homescreen</p>
+	<p class="info">> After url has been set, the app will automatically redirect to that url while keeping fullscreen (depending on used browser)</p>
+	<p class="info">> To clear the target url, make a new id or clear an existing id by navigating to /[id]/clear ({$page.url.host}/manga/clear)</p>
 </Main>
 
 <style lang="scss">
@@ -50,24 +48,17 @@
 		color: #ddd;
 		margin-bottom: 2vh;
 	}
-
-	.target {
-		margin-top: 3rem;
+	
+	p {
+		margin: 0;
 	}
-
+	
+	.step {
+		margin-left: 15px;
+	}
+	
 	.info {
-		margin-top: 2rem;
 		color: #aaa;
-		font-size: 14px;
-
-		span {
-			color: #ddd;
-		}
-		
-		br {
-			display: block;
-			content: '';
-			margin-top: 0.5rem;
-		}
+		font-size: 15px;
 	}
 </style>
