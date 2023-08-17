@@ -28,6 +28,7 @@
 
 <svelte:head>
 	<title>Director - {$page.params['id']}</title>
+	<link rel="manifest" href={`/${$page.params['id']}/manifest`} />
 </svelte:head>
 
 <Main>

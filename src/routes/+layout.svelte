@@ -6,7 +6,7 @@
 
 <svelte:head>
     <title>Director</title>
-    <link rel="manifest" href={`${assets}/manifest.json`} />
+    <!-- <link rel="manifest" href={`${assets}/manifest.json`} /> -->
 </svelte:head>
 
 <slot />
