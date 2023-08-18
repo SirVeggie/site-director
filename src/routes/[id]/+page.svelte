@@ -8,7 +8,7 @@
 
 	let value = '';
 	let target = '';
-	let checked = localStorage.getItem('fullscreen') === 'true';
+	let checked = false;
 
 	function enter(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
@@ -26,6 +26,7 @@
 	}
 
 	onMount(() => {
+		checked = localStorage.getItem('fullscreen') === 'true';
 		const url = localStorage.getItem(`targetUrl:${$page.params['id']}`);
 		if (url) {
 			window.location.href = url;
