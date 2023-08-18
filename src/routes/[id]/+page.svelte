@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
+	import Checkbox from '$lib/components/Checkbox.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Main from '$lib/components/Main.svelte';
 	import { onMount } from 'svelte';
 
 	let value = '';
 	let target = '';
+	let checked = false;
 
 	function enter(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
@@ -28,7 +30,7 @@
 
 <svelte:head>
 	<title>Director - {$page.params['id']}</title>
-	<link rel="manifest" href={`/${$page.params['id']}/manifest`} />
+	<link rel="manifest" href={`/${$page.params['id']}/manifest${checked ? "?display=fullscreen" : ""}`} />
 </svelte:head>
 
 <Main>
@@ -36,7 +38,10 @@
 	<h1>Set target url</h1>
 	<Input bind:value on:keydown={enter} />
 	<br />
-	<Button on:click={set}>Save</Button>
+	<div class="buttons">
+		<Button on:click={set}>Save</Button>
+		<Checkbox text="Fullscreen" bind:checked />
+	</div>
 	<div class="target">Current target: {target}</div>
 	<div class="info">
 		> Clear the target url by navigating to
@@ -65,6 +70,11 @@
 		span {
 			color: #888;
 		}
+	}
+	
+	.buttons {
+		display: flex;
+		gap: 2rem;
 	}
 
 	.target {
