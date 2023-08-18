@@ -11,5 +11,6 @@ export async function GET(e) {
         "background_color": "#242424",
         "theme_color": "#242424"
     };
+    
     return new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } });
 }

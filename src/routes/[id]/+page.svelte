@@ -8,7 +8,7 @@
 
 	let value = '';
 	let target = '';
-	let checked = false;
+	let checked = localStorage.getItem('fullscreen') === 'true';
 
 	function enter(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
@@ -18,6 +18,11 @@
 	function set() {
 		target = value;
 		localStorage.setItem(`targetUrl:${$page.params['id']}`, value);
+	}
+
+	function onCheck(checked: boolean) {
+		if (checked) localStorage.setItem('fullscreen', 'true');
+		else localStorage.removeItem('fullscreen');
 	}
 
 	onMount(() => {
@@ -30,7 +35,10 @@
 
 <svelte:head>
 	<title>Director - {$page.params['id']}</title>
-	<link rel="manifest" href={`/${$page.params['id']}/manifest${checked ? "?display=fullscreen" : ""}`} />
+	<link
+		rel="manifest"
+		href={`/${$page.params['id']}/manifest${checked ? '?display=fullscreen' : ''}`}
+	/>
 </svelte:head>
 
 <Main>
@@ -40,7 +48,7 @@
 	<br />
 	<div class="buttons">
 		<Button on:click={set}>Save</Button>
-		<Checkbox text="Fullscreen" bind:checked />
+		<Checkbox text="Fullscreen" bind:checked onChange={onCheck} />
 	</div>
 	<div class="target">Current target: {target}</div>
 	<div class="info">
@@ -51,6 +59,8 @@
 		> This is a helper tool to open websites in fullscreen on mobile
 		<br />
 		> Site automatically redirects to the target url on refresh until cleared
+		<br />
+		> Some mobile browsers require refresh on this screen to work properly
 	</div>
 </Main>
 
@@ -71,7 +81,7 @@
 			color: #888;
 		}
 	}
-	
+
 	.buttons {
 		display: flex;
 		gap: 2rem;
